@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="ticket">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <div id="toPrint">
-
-
         <div class="ticket" id="ticket">
             <p class="centered" id="customer"></p>
             <p class="centered" id="location"></p>
             <p class="centered" id="date"></p>
+
             <table>
                 <thead>
                     <tr>
@@ -51,7 +54,81 @@
             </p>
         </div>
     </div>
-    <script src="index.js"></script>
+    <script>
+        const main = () => {
+            window.jsPDF = window.jspdf.jsPDF
+            const parameters = new URLSearchParams(window.location.search);
+            let params = {};
+            const cleanUpData = (key) => {
+                return key.split(",").map((ind) => ind.trim());
+            };
+            for (var value of parameters.keys()) {
+                params[value] = parameters.get(value);
+            }
+            console.log(params);
+            const {
+                products,
+                quantity,
+                unitpricelbp,
+                unitpriceusd,
+                customer,
+                location,
+                date,
+                totalLbp,
+                totalusd,
+            } = params;
+
+            const prodArr = [];
+            cleanUpData(products).forEach((name) => prodArr.push({ name }));
+            cleanUpData(quantity).forEach(
+                (quantity, i) => (prodArr[i].quantity = quantity)
+            );
+            cleanUpData(unitpricelbp).forEach(
+                (unitpricelbp, i) => (prodArr[i].unitpricelbp = unitpricelbp)
+            );
+            cleanUpData(unitpriceusd).forEach(
+                (unitpriceusd, i) => (prodArr[i].unitpriceusd = unitpriceusd)
+            );
+
+            const customerPart = document.querySelector("#customer");
+            customerPart.innerHTML = customer;
+            const locationPart = document.querySelector("#location");
+            locationPart.innerHTML = location;
+            const datePart = document.querySelector("#date");
+            datePart.innerHTML = date;
+            const tableBody = document.querySelector("#tableBod");
+
+            prodArr.forEach((product) => {
+                tableBody.innerHTML += `
+        <tr>
+        <td class="quantity">${product.quantity}</td>
+        <td class="description">${product.name}</td>
+        <td class="price">${product.unitpricelbp}</td>
+        <td class="price">${product.unitpriceusd}</td>
+        </tr>`;
+            });
+            const totalpricelbpPart = document.querySelector("#totalpricelbp");
+            totalpricelbpPart.innerHTML = totalLbp;
+            const totalpriceusdPart = document.querySelector("#totalpriceusd");
+            totalpriceusdPart.innerHTML = totalusd;
+
+            const toPrint = document.querySelector("#toPrint");
+
+            var doc = new jsPDF();
+
+            doc.html(document.querySelector("#toPrint"), {
+                callback: function (doc) {
+                    const base64Full = doc.output('datauri')
+                    console.log(base64Full.split("base64,")[1])
+                    document.location.href =
+                        "rawbt:data:application/pdf;base64," + base64Full.split("base64,")[1];
+                }
+            });
+
+        };
+        main();
+
+    </script>
 
 </body>
 
