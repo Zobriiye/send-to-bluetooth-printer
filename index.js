@@ -57,6 +57,6 @@ const main = () => {
     const toPrint = document.querySelector("#toPrint");
     const base64Encoded = btoa(toPrint.innerHTML);
     console.log(base64Encoded);
-    document.location.href = "rawbt:data:text/html;base64," + base64Encoded;
+    document.location.href = "rawbt:data:base64," + base64Encoded;
 };
 main();
