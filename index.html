@@ -5,11 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-    <a href="rawbt:Hello,%20world!%0A%0A"> Hello, world! </a>
+    <div class="ticket">
+        <p class="centered" id="customer"></p>
+        <p class="centered" id="location"></p>
+        <p class="centered" id="date"></p>
+        <table>
+            <thead>
+                <tr>
+                    <th class="quantity">Q.</th>
+                    <th class="description">Description</th>
+                    <th class="price">LL</th>
+                    <th class="price">$</th>
+                </tr>
+            </thead>
+            <tbody id="tableBod">
+
+            </tbody>
+        </table>
+        <div class="centered">
+
+            <table>
+                <tbody>
+
+                    <tr>
+                        <td class="price">Total LL</td>
+                        <td class="description" id="totalpricelbp">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="price">Total $</td>
+                        <td class="description" id="totalpriceusd"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class=" centered">
+        </p>
+    </div>
+    <script src="index.js"></script>
 
 </body>
 
