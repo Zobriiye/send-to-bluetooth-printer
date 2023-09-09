@@ -9,43 +9,47 @@
 </head>
 
 <body>
+    <div id="toPrint">
 
-    <div class="ticket">
-        <p class="centered" id="customer"></p>
-        <p class="centered" id="location"></p>
-        <p class="centered" id="date"></p>
-        <table>
-            <thead>
-                <tr>
-                    <th class="quantity">Q.</th>
-                    <th class="description">Description</th>
-                    <th class="price">LL</th>
-                    <th class="price">$</th>
-                </tr>
-            </thead>
-            <tbody id="tableBod">
 
-            </tbody>
-        </table>
-        <div class="centered">
-
+        <div class="ticket" id="ticket">
+            <p class="centered" id="customer"></p>
+            <p class="centered" id="location"></p>
+            <p class="centered" id="date"></p>
             <table>
-                <tbody>
+                <thead>
+                    <tr>
+                        <th class="quantity">Q.</th>
+                        <th class="description">Description</th>
+                        <th class="price">LL</th>
+                        <th class="price">$</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBod">
 
-                    <tr>
-                        <td class="price">Total LL</td>
-                        <td class="description" id="totalpricelbp">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="price">Total $</td>
-                        <td class="description" id="totalpriceusd"></td>
-                    </tr>
                 </tbody>
             </table>
+            <div class="centered">
+
+                <table>
+                    <tbody>
+
+                        <tr>
+                            <td class="price">Total LL</td>
+                            <td class="description" id="totalpricelbp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="price">Total $</td>
+                            <td class="description" id="totalpriceusd"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class=" centered">
+                Thank you.
+            </p>
         </div>
-        <p class=" centered">
-        </p>
     </div>
     <script src="index.js"></script>
 

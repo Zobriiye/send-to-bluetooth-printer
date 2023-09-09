@@ -54,6 +54,9 @@ const main = () => {
     const totalpriceusdPart = document.querySelector("#totalpriceusd");
     totalpriceusdPart.innerHTML = totalusd;
 
-    console.log(prodArr);
+    const toPrint = document.querySelector("#toPrint");
+    const base64Encoded = btoa(toPrint.innerHTML);
+    console.log(base64Encoded);
+    document.location.href = "rawbt:data:text/html;base64," + base64Encoded;
 };
 main();
