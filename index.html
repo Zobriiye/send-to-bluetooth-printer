@@ -77,7 +77,7 @@
                 location,
                 date,
                 totalLbp,
-                totalusd, pagewidth
+                totalusd, pagewidth, savePdf
             } = params;
 
             const prodArr = [];
@@ -123,7 +123,7 @@
             doc.html(ticket, {
                 callback: function (doc) {
                     const base64Full = doc.output('datauri')
-                    doc.save()
+                    if (savePdf) doc.save()
                     document.location.href =
                         "rawbt:data:application/pdf;base64," + base64Full.split("base64,")[1];
                 }
