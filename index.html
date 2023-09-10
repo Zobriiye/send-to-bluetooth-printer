@@ -123,7 +123,7 @@
             doc.html(ticket, {
                 callback: function (doc) {
                     const base64Full = doc.output('datauri')
-                    console.log(base64Full.split("base64,")[1])
+                    doc.save()
                     document.location.href =
                         "rawbt:data:application/pdf;base64," + base64Full.split("base64,")[1];
                 }
