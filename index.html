@@ -119,7 +119,7 @@
             const ticket = document.querySelector("#ticket")
             ticket.style.maxWidth = pagewidth;
             ticket.style.width = pagewidth;
-            var doc = new jsPDF("p", "mm", [ticket.clientHeight, ticket.clientWidth]);
+            var doc = new jsPDF(ticket.clientHeight < ticket.clientWidth ? "l" : "p", "px", [ticket.clientHeight, ticket.clientWidth]);
             doc.html(ticket, {
                 callback: function (doc) {
                     const base64Full = doc.output('datauri')
