@@ -116,10 +116,10 @@
 
             const toPrint = document.querySelector("#toPrint");
 
-            var doc = new jsPDF();
             const ticket = document.querySelector("#ticket")
             ticket.style.maxWidth = pagewidth;
             ticket.style.width = pagewidth;
+            var doc = new jsPDF("p", "mm", [ticket.clientHeight, ticket.clientWidth]);
             doc.html(ticket, {
                 callback: function (doc) {
                     const base64Full = doc.output('datauri')
