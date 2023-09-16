@@ -77,19 +77,42 @@
                 location,
                 date,
                 totalLbp,
-                totalusd, pagewidth, savePdf
+                totalusd, pagewidth, savePdf, splitSubTotal
             } = params;
 
             const prodArr = [];
             cleanUpData(products).forEach((name) => prodArr.push({ name }));
-            cleanUpData(quantity).forEach(
-                (quantity, i) => (prodArr[i].quantity = quantity)
-            );
+            const quantities = cleanUpData(quantity)
+            quantities.forEach(
+                (quantity, i) => (prodArr[i].quantity = quantity));
             cleanUpData(unitpricelbp).forEach(
-                (unitpricelbp, i) => (prodArr[i].unitpricelbp = unitpricelbp)
+                (unitpricelbp, i) => {
+                    if (!splitSubTotal) {
+                        prodArr[i].unitpricelbp = unitpricelbp
+                    } else {
+                        if (parseInt(unitpricelbp) != 0) {
+
+                            prodArr[i].unitpricelbp = parseInt(unitpricelbp) / parseInt(quantities[i])
+                        } else {
+
+                            prodArr[i].unitpricelbp = 0
+                        }
+                    }
+                }
             );
             cleanUpData(unitpriceusd).forEach(
-                (unitpriceusd, i) => (prodArr[i].unitpriceusd = unitpriceusd)
+                (unitpriceusd, i) => {
+                    if (!splitSubTotal) {
+                        prodArr[i].unitpriceusd = unitpriceusd
+                    } else {
+                        if (parseFloat(unitpriceusd) != 0) {
+
+                            prodArr[i].unitpriceusd = parseFloat(unitpriceusd) / parseInt(quantities[i])
+                        } else {
+                            prodArr[i].unitpriceusd = 0
+                        }
+                    }
+                }
             );
 
             const customerPart = document.querySelector("#customer");
