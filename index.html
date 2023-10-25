@@ -24,8 +24,8 @@
                 <tr>
                     <th class="quantity">Q.</th>
                     <th class="description">Description</th>
-                    <th class="price">LL</th>
-                    <th class="price">$</th>
+                    <th id="lbpColumn" class="price">LL</th>
+                    <th id="usdColumn" class="price">$</th>
                 </tr>
             </thead>
             <tbody id="tableBod">
@@ -39,12 +39,12 @@
             <table>
                 <tbody>
 
-                    <tr>
+                    <tr id="lbpTotalRow">
                         <td class="price">Total LL</td>
                         <td class="description" id="totalpricelbp">
                         </td>
                     </tr>
-                    <tr>
+                    <tr id="usdTotalRow">
                         <td class="price">Total $</td>
                         <td class="description" id="totalpriceusd"></td>
                     </tr>
@@ -76,7 +76,7 @@
                 customer,
                 location,
                 date,
-                totalLbp,
+                totalLbp, target,
                 totalusd, pagewidth, savePdf, splitSubTotal
             } = params;
 
@@ -114,8 +114,24 @@
                     }
                 }
             );
-
+            const lbpColumn = document.querySelector("#lbpColumn")
+            const usdColumn = document.querySelector("#usdColumn")
+            const lbpTotalRow = document.querySelector("#lbpTotalRow")
+            const usdTotalRow = document.querySelector("#usdTotalRow")
             const customerPart = document.querySelector("#customer");
+            switch (target) {
+                case "LBP":
+                    usdColumn.remove()
+                    usdTotalRow.remove()
+                    break;
+                case "USD":
+                    lbpColumn.remove()
+                    lbpTotalRow.remove()
+                    break;
+                default:
+                    break;
+            }
+
             customerPart.innerHTML = customer;
             const locationPart = document.querySelector("#location");
             locationPart.innerHTML = location;
@@ -128,8 +144,8 @@
         <tr>
         <td class="quantity">${product.quantity}</td>
         <td class="description">${product.name}</td>
-        <td class="price">${product.unitpricelbp}</td>
-        <td class="price">${product.unitpriceusd}</td>
+        ${!target || target === "LBP" ? `<td class="price">${product.unitpricelbp}</td>` : ""}
+        ${!target || target === "USD" ? `<td class="price">${product.unitpriceusd}</td>` : ""}
         </tr>`;
             });
             const totalpricelbpPart = document.querySelector("#totalpricelbp");
