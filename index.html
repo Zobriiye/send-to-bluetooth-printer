@@ -18,7 +18,7 @@
         <p class="centered" id="companyName"></p>
         <p class="centered" id="date"></p>
         <p class="centered" id="customer"></p>
-        <p class="centered" id="location"></p>
+        <!-- <p class="centered" id="location"></p> -->
 
         <table>
             <thead>
@@ -146,9 +146,9 @@
 
                 companyNamePart.innerHTML = companyName
             }
-            customerPart.innerHTML = customer;
-            const locationPart = document.querySelector("#location");
-            locationPart.innerHTML = location;
+            customerPart.innerHTML = customer + ", " + location;
+            // const locationPart = document.querySelector("#location");
+            // locationPart.innerHTML = location;
             const datePart = document.querySelector("#date");
             datePart.innerHTML = date;
             const tableBody = document.querySelector("#tableBod");
