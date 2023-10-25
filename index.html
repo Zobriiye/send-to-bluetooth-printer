@@ -15,9 +15,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <div class="ticket" id="ticket">
+        <p class="centered" id="companyName"></p>
+        <p class="centered" id="date"></p>
         <p class="centered" id="customer"></p>
         <p class="centered" id="location"></p>
-        <p class="centered" id="date"></p>
 
         <table>
             <thead>
@@ -75,7 +76,7 @@
                 unitpriceusd,
                 customer,
                 location,
-                date,
+                date, companyName,
                 totalLbp, target,
                 totalusd, pagewidth, savePdf, splitSubTotal
             } = params;
@@ -119,19 +120,32 @@
             const lbpTotalRow = document.querySelector("#lbpTotalRow")
             const usdTotalRow = document.querySelector("#usdTotalRow")
             const customerPart = document.querySelector("#customer");
+            const totalpricelbpPart = document.querySelector("#totalpricelbp");
+            const totalpriceusdPart = document.querySelector("#totalpriceusd");
+            console.log(totalusd)
             switch (target) {
                 case "LBP":
                     usdColumn.remove()
                     usdTotalRow.remove()
+                    totalpricelbpPart.innerHTML = totalLbp;
                     break;
                 case "USD":
                     lbpColumn.remove()
                     lbpTotalRow.remove()
+                    totalpriceusdPart.innerHTML = totalusd;
                     break;
                 default:
+                    totalpriceusdPart.innerHTML = totalusd;
+                    totalpricelbpPart.innerHTML = totalLbp;
                     break;
             }
+            const companyNamePart = document.querySelector("#companyName");
+            if (!companyName) {
+                companyNamePart.remove()
+            } else {
 
+                companyNamePart.innerHTML = companyName
+            }
             customerPart.innerHTML = customer;
             const locationPart = document.querySelector("#location");
             locationPart.innerHTML = location;
@@ -148,10 +162,7 @@
         ${!target || target === "USD" ? `<td class="price">${product.unitpriceusd}</td>` : ""}
         </tr>`;
             });
-            const totalpricelbpPart = document.querySelector("#totalpricelbp");
-            totalpricelbpPart.innerHTML = totalLbp;
-            const totalpriceusdPart = document.querySelector("#totalpriceusd");
-            totalpriceusdPart.innerHTML = totalusd;
+
 
             const toPrint = document.querySelector("#toPrint");
 
