@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
         integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
 
     <div class="ticket" id="ticket">
         <p class="centered" id="companyName"></p>
@@ -39,6 +39,17 @@
         <div class="centered">
             <table>
                 <tbody>
+                    <tr id="usdTotalRow">
+                        <td style="max-width: 50%;" class="price">Pots remaining</td>
+                        <td style="max-width: 25%;" class="description" id="potsRemainingLarge"></td>
+                        <td style="max-width: 25%;" class="description" id="potsRemainingMedium"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="centered">
+            <table>
+                <tbody>
 
                     <tr id="lbpTotalRow">
                         <td class="price">Total LL</td>
@@ -59,7 +70,7 @@
     </div>
     <script>
         const main = () => {
-            window.jsPDF = window.jspdf.jsPDF
+            // window.jsPDF = window.jspdf.jsPDF
             const parameters = new URLSearchParams(window.location.search);
             let params = {};
             const cleanUpData = (key) => {
@@ -78,7 +89,7 @@
                 location,
                 date, companyName,
                 totalLbp, target,
-                totalusd, pagewidth, savePdf, splitSubTotal
+                totalusd, pagewidth, savePdf, splitSubTotal, potsRemainingLarge, potsRemainingMedium
             } = params;
 
             const prodArr = [];
@@ -120,9 +131,13 @@
             const lbpTotalRow = document.querySelector("#lbpTotalRow")
             const usdTotalRow = document.querySelector("#usdTotalRow")
             const customerPart = document.querySelector("#customer");
+            const potsRemainingLargePart = document.querySelector("#potsRemainingLarge");
+            const potsRemainingMediumPart = document.querySelector("#potsRemainingMedium");
             const totalpricelbpPart = document.querySelector("#totalpricelbp");
             const totalpriceusdPart = document.querySelector("#totalpriceusd");
             console.log(totalusd)
+            potsRemainingLargePart.innerHTML = (potsRemainingLarge ? potsRemainingLarge : 0) + ' L'
+            potsRemainingMediumPart.innerHTML = (potsRemainingMedium ? potsRemainingMedium : 0) + ' M'
             switch (target) {
                 case "LBP":
                     usdColumn.remove()
@@ -169,15 +184,15 @@
             const ticket = document.querySelector("#ticket")
             ticket.style.maxWidth = pagewidth;
             ticket.style.width = pagewidth;
-            var doc = new jsPDF(ticket.clientHeight < ticket.clientWidth ? "l" : "p", "px", [ticket.clientHeight, ticket.clientWidth]);
-            doc.html(ticket, {
-                callback: function (doc) {
-                    const base64Full = doc.output('datauri')
-                    if (savePdf) doc.save()
-                    document.location.href =
-                        "rawbt:data:application/pdf;base64," + base64Full.split("base64,")[1];
-                }
-            });
+            // var doc = new jsPDF(ticket.clientHeight < ticket.clientWidth ? "l" : "p", "px", [ticket.clientHeight, ticket.clientWidth]);
+            // doc.html(ticket, {
+            //     callback: function (doc) {
+            //         const base64Full = doc.output('datauri')
+            //         if (savePdf) doc.save()
+            //         document.location.href =
+            //             "rawbt:data:application/pdf;base64," + base64Full.split("base64,")[1];
+            //     }
+            // });
 
         };
         main();
