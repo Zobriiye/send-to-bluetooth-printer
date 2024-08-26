@@ -39,7 +39,7 @@
         <div id="potsSection" class="centered">
             <table>
                 <tbody>
-                    <tr id="usdTotalRow">
+                    <tr>
                         <td style="max-width: 50%;" class="price">Pots Remaining</td>
                         <td style="max-width: 25%;" class="description" id="potsRemainingLarge"></td>
                         <td style="max-width: 25%;" class="description" id="potsRemainingMedium"></td>
@@ -67,12 +67,12 @@
             <table>
                 <tbody>
 
-                    <tr id="lbpTotalRow">
+                    <tr>
                         <td class="price">Amount Paid $</td>
                         <td class="description" id="amountPaid">
                         </td>
                     </tr>
-                    <tr id="usdTotalRow">
+                    <tr>
                         <td class="price">Amount Left $</td>
                         <td class="description" id="amountLeft"></td>
                     </tr>
@@ -161,6 +161,7 @@
             potsRemainingMediumPart.innerHTML = (potsRemainingMedium ? potsRemainingMedium : 0) + ' M'
             amountPaidPart.innerHTML = (amountPaid ? amountPaid : 0)
             amountLeftPart.innerHTML = (amountLeft ? amountLeft : 0)
+            console.log(enablePots)
             if (enablePots === undefined || enablePots === "") {
                 potsSection.remove()
             }
