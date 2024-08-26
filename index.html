@@ -75,6 +75,11 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="price">Amount Paid LBP</td>
+                        <td class="description" id="amountPaidLbp">
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="price">Amount Left $</td>
                         <td class="description" id="amountLeft"></td>
                     </tr>
@@ -108,7 +113,7 @@
                 date, companyName,
                 totalLbp, target,
                 totalusd, pagewidth, savePdf, splitSubTotal, potsRemainingLarge, transId,
-                potsRemainingMedium, amountPaid, amountLeft, enablePots, enablePaidLeft
+                potsRemainingMedium, amountPaid, amountPaidLbp, amountLeft, enablePots, enablePaidLeft
             } = params;
 
             const prodArr = [];
@@ -155,6 +160,7 @@
             const totalpricelbpPart = document.querySelector("#totalpricelbp");
             const totalpriceusdPart = document.querySelector("#totalpriceusd");
             const amountPaidPart = document.querySelector("#amountPaid");
+            const amountPaidLbpPart = document.querySelector("#amountPaidLbp");
             const amountLeftPart = document.querySelector("#amountLeft");
             const potsSection = document.querySelector("#potsSection")
             const paidLeftSection = document.querySelector("#paidLeftSection")
@@ -164,6 +170,7 @@
             potsRemainingLargePart.innerHTML = (potsRemainingLarge ? potsRemainingLarge : 0) + ' L'
             potsRemainingMediumPart.innerHTML = (potsRemainingMedium ? potsRemainingMedium : 0) + ' M'
             amountPaidPart.innerHTML = (amountPaid ? amountPaid : 0)
+            amountPaidLbpPart.innerHTML = (amountPaidLbp ? amountPaidLbp : 0)
             amountLeftPart.innerHTML = (amountLeft ? amountLeft : 0)
             console.log(enablePots)
             if (enablePots === undefined || enablePots === "") {
