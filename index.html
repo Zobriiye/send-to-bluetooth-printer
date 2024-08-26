@@ -36,11 +36,11 @@
 
         <br />
         <br />
-        <div class="centered">
+        <div id="potsSection" class="centered">
             <table>
                 <tbody>
                     <tr id="usdTotalRow">
-                        <td style="max-width: 50%;" class="price">Pots remaining</td>
+                        <td style="max-width: 50%;" class="price">Pots Remaining</td>
                         <td style="max-width: 25%;" class="description" id="potsRemainingLarge"></td>
                         <td style="max-width: 25%;" class="description" id="potsRemainingMedium"></td>
                     </tr>
@@ -59,6 +59,22 @@
                     <tr id="usdTotalRow">
                         <td class="price">Total $</td>
                         <td class="description" id="totalpriceusd"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="paidLeftSection" class="centered">
+            <table>
+                <tbody>
+
+                    <tr id="lbpTotalRow">
+                        <td class="price">Amount Paid $</td>
+                        <td class="description" id="amountPaid">
+                        </td>
+                    </tr>
+                    <tr id="usdTotalRow">
+                        <td class="price">Amount Left $</td>
+                        <td class="description" id="amountLeft"></td>
                     </tr>
                 </tbody>
             </table>
@@ -89,7 +105,8 @@
                 location,
                 date, companyName,
                 totalLbp, target,
-                totalusd, pagewidth, savePdf, splitSubTotal, potsRemainingLarge, potsRemainingMedium
+                totalusd, pagewidth, savePdf, splitSubTotal, potsRemainingLarge,
+                potsRemainingMedium, amountPaid, amountLeft, enablePots, enablePaidLeft
             } = params;
 
             const prodArr = [];
@@ -135,9 +152,21 @@
             const potsRemainingMediumPart = document.querySelector("#potsRemainingMedium");
             const totalpricelbpPart = document.querySelector("#totalpricelbp");
             const totalpriceusdPart = document.querySelector("#totalpriceusd");
+            const amountPaidPart = document.querySelector("#amountPaid");
+            const amountLeftPart = document.querySelector("#amountLeft");
+            const potsSection = document.querySelector("#potsSection")
+            const paidLeftSection = document.querySelector("#paidLeftSection")
             console.log(totalusd)
             potsRemainingLargePart.innerHTML = (potsRemainingLarge ? potsRemainingLarge : 0) + ' L'
             potsRemainingMediumPart.innerHTML = (potsRemainingMedium ? potsRemainingMedium : 0) + ' M'
+            amountPaidPart.innerHTML = (amountPaid ? amountPaid : 0)
+            amountLeftPart.innerHTML = (amountLeft ? amountLeft : 0)
+            if (enablePots === undefined || enablePaidLeft === "") {
+                potsSection.remove()
+            }
+            if (enablePaidLeft === undefined || enablePaidLeft === "") {
+                paidLeftSection.remove()
+            }
             switch (target) {
                 case "LBP":
                     usdColumn.remove()
