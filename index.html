@@ -18,6 +18,8 @@
         <p class="centered" id="companyName"></p>
         <p class="centered" id="date"></p>
         <p class="centered" id="customer"></p>
+        <p class="centered" id="invoiceNumber"></p>
+
         <!-- <p class="centered" id="location"></p> -->
 
         <table>
@@ -105,7 +107,7 @@
                 location,
                 date, companyName,
                 totalLbp, target,
-                totalusd, pagewidth, savePdf, splitSubTotal, potsRemainingLarge,
+                totalusd, pagewidth, savePdf, splitSubTotal, potsRemainingLarge, transId,
                 potsRemainingMedium, amountPaid, amountLeft, enablePots, enablePaidLeft
             } = params;
 
@@ -156,6 +158,8 @@
             const amountLeftPart = document.querySelector("#amountLeft");
             const potsSection = document.querySelector("#potsSection")
             const paidLeftSection = document.querySelector("#paidLeftSection")
+            const invoiceNumber = document.querySelector("#invoiceNumber")
+            invoiceNumber.innerHTML = transId
             console.log(totalusd)
             potsRemainingLargePart.innerHTML = (potsRemainingLarge ? potsRemainingLarge : 0) + ' L'
             potsRemainingMediumPart.innerHTML = (potsRemainingMedium ? potsRemainingMedium : 0) + ' M'
