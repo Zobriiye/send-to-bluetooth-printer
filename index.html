@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
         integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <div class="ticket" id="ticket">
         <p class="centered" id="companyName"></p>
@@ -86,7 +86,7 @@
     </div>
     <script>
         const main = () => {
-            // window.jsPDF = window.jspdf.jsPDF
+            window.jsPDF = window.jspdf.jsPDF
             const parameters = new URLSearchParams(window.location.search);
             let params = {};
             const cleanUpData = (key) => {
@@ -213,15 +213,15 @@
             const ticket = document.querySelector("#ticket")
             ticket.style.maxWidth = pagewidth;
             ticket.style.width = pagewidth;
-            // var doc = new jsPDF(ticket.clientHeight < ticket.clientWidth ? "l" : "p", "px", [ticket.clientHeight, ticket.clientWidth]);
-            // doc.html(ticket, {
-            //     callback: function (doc) {
-            //         const base64Full = doc.output('datauri')
-            //         if (savePdf) doc.save()
-            //         document.location.href =
-            //             "rawbt:data:application/pdf;base64," + base64Full.split("base64,")[1];
-            //     }
-            // });
+            var doc = new jsPDF(ticket.clientHeight < ticket.clientWidth ? "l" : "p", "px", [ticket.clientHeight, ticket.clientWidth]);
+            doc.html(ticket, {
+                callback: function (doc) {
+                    const base64Full = doc.output('datauri')
+                    if (savePdf) doc.save()
+                    document.location.href =
+                        "rawbt:data:application/pdf;base64," + base64Full.split("base64,")[1];
+                }
+            });
 
         };
         main();
